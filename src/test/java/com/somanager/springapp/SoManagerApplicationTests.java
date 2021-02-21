@@ -1,4 +1,4 @@
-package com.somanager.springmongodbapp;
+package com.somanager.springapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

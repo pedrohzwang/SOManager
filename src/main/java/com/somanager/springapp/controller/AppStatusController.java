@@ -1,4 +1,4 @@
-package com.somanager.springmongodbapp.controller;
+package com.somanager.springapp.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
