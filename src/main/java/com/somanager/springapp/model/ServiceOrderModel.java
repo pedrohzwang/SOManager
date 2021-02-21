@@ -1,21 +1,23 @@
-package com.somanager.springmongodbapp.model;
+package com.somanager.springapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import javax.persistence.*;
+
 
 @Data
 @NoArgsConstructor
 
-@Document(collection = "service_order")
+@Entity(name = "service_order")
 public class ServiceOrderModel {
 
     @Id
     private Integer number;
+    @Column(nullable = false, length = 200)
     private String description;
+    @Column(nullable = false, length = 45)
     private String date;
+    @Column(nullable = false, length = 50)
     private String user;
 }
