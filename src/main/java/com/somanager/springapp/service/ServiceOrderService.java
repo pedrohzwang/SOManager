@@ -3,6 +3,7 @@ package com.somanager.springapp.service;
 import com.somanager.springapp.model.ServiceOrderModel;
 import com.somanager.springapp.repository.ServiceOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +24,36 @@ public class ServiceOrderService {
         return repository.save(so);
     }
 
-    public Optional<ServiceOrderModel> findByNumber(Integer number){
-        return repository.findById(number);
+    public ServiceOrderModel findByNumber(Integer number){
+        return repository.findByNumber(number);
     }
 
-    /*public Optional<ServiceOrderModel> findByUser(String user){
-        return repository.exists()
-    }*/
+    public ResponseEntity<Void> deleteServiceOrder(Integer number){
+        repository.deleteById(number);
+        return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity<Void> deleteAllServiceOrder(){
+        repository.deleteAll();
+        return ResponseEntity.noContent().build();
+    }
+
+    public List<ServiceOrderModel> findByUser(String user){
+        return repository.findByUser(user);
+    }
+
+    public ServiceOrderModel updateSO(ServiceOrderModel newSO){
+        ServiceOrderModel serviceOrder = findByNumber(newSO.getNumber());
+        updateData(serviceOrder, newSO);
+        return repository.save(serviceOrder);
+    }
+
+    private void updateData(ServiceOrderModel serviceOrder, ServiceOrderModel newSO) {
+        serviceOrder.setDescription(newSO.getDescription());
+        serviceOrder.setDate(newSO.getDate());
+        serviceOrder.setUser(newSO.getUser());
+    }
+
+
+
 }
