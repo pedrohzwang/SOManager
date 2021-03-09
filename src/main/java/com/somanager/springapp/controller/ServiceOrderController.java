@@ -17,28 +17,30 @@ public class ServiceOrderController {
     private ServiceOrderService service;
 
     @GetMapping
-    public List<ServiceOrderModel> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<ServiceOrderModel>> findAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping
-    public ServiceOrderModel addSO(@RequestBody ServiceOrderModel so){
-        return service.save(so);
+    public ResponseEntity<ServiceOrderModel> addSO(@RequestBody ServiceOrderModel so){
+        return ResponseEntity.ok(service.save(so));
     }
 
     @GetMapping(path = "/{number}")
-    public ServiceOrderModel findByNumber(@PathVariable("number") Integer number){
-        return service.findByNumber(number);
+    public ResponseEntity<ServiceOrderModel> findByNumber(@PathVariable("number") Integer number){
+        return ResponseEntity.ok(service.findByNumber(number));
     }
 
     @DeleteMapping(path = "/delete")
-    public void deleteAllSO(){
+    public ResponseEntity<Void> deleteAllSO(){
         service.deleteAllServiceOrder();
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(path = "/delete/{number}")
-    public void deleteSO(@PathVariable("number") Integer number){
+    public ResponseEntity<Void> deleteSO(@PathVariable("number") Integer number){
         service.deleteServiceOrder(number);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(path = "/findByUser/{user}")
@@ -48,7 +50,7 @@ public class ServiceOrderController {
 
     @PutMapping(path = "/update/{number}")
     public ResponseEntity<Void> updateSO(@RequestBody ServiceOrderModel newSO, @PathVariable("number") Integer number){
-        ServiceOrderModel serviceOrder = service.updateSO(newSO);
+        service.updateSO(newSO);
         return ResponseEntity.noContent().build();
     }
 }
