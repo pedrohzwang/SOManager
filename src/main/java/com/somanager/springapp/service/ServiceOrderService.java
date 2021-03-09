@@ -28,14 +28,12 @@ public class ServiceOrderService {
         return repository.findByNumber(number);
     }
 
-    public ResponseEntity<Void> deleteServiceOrder(Integer number){
+    public void deleteServiceOrder(Integer number){
         repository.deleteById(number);
-        return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<Void> deleteAllServiceOrder(){
+    public void deleteAllServiceOrder(){
         repository.deleteAll();
-        return ResponseEntity.noContent().build();
     }
 
     public List<ServiceOrderModel> findByUser(String user){
